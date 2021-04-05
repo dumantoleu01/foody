@@ -16,7 +16,7 @@ class _SignInState extends State<SignIn> {
         backgroundColor: Color(0xFFFEFEFE),
         title: Center(
           child: Text(
-            'Авторизация',
+            'Sign In',
             style: TextStyle(
               fontFamily: 'Manrope',
               color: Colors.black,
