@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foody/src/common/widgets/appbar/appbar.dart';
 import 'package:foody/src/common/widgets/buttons/sign_in_button.dart';
-import 'package:foody/src/screens/auth/widgets/confirm_digit.dart';
 
 class Confirmation extends StatefulWidget {
   Confirmation({Key key}) : super(key: key);
