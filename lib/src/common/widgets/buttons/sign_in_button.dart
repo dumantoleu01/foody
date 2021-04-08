@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 class SignInButton extends StatelessWidget {
   final String text;
   final Function check;
-  const SignInButton({Key key, this.text, this.check}) : super(key: key);
+  final String path;
+  const SignInButton({Key key, this.text, this.check, this.path})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 100,
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+      width: double.maxFinite,
+      padding: EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         border: Border(),
       ),
@@ -18,14 +20,29 @@ class SignInButton extends StatelessWidget {
           elevation: 0,
           primary: Color(0xFF4631D2),
         ),
-        onPressed: check,
+        onPressed: () {
+          Navigator.pushNamed(context, path);
+        },
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Text(
-            text,
-            style: TextStyle(
-              color: Colors.white,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                text + " ",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              (text == 'Отправить код ещё раз')
+                  ? TweenAnimationBuilder(
+                      tween: Tween(begin: 30.0, end: 0),
+                      duration: Duration(seconds: 30),
+                      builder: (context, value, child) =>
+                          Text("0:${value.toInt()}"),
+                    )
+                  : Offstage(),
+            ],
           ),
         ),
       ),

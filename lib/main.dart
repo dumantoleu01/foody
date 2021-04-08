@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foody/src/screens/auth/authorization.dart';
+import 'package:foody/src/screens/auth/confirmation.dart';
 import 'package:foody/src/screens/auth/sign_in.dart';
 import 'package:foody/src/screens/auth/sign_in_validation.dart';
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
         '/sign_in': (context) => SignIn(),
         '/sign_inValidation': (context) => SignInValidation(),
         '/authorization': (context) => Authorization(),
+        '/confirmation': (context) => Confirmation(),
       },
     );
   }
