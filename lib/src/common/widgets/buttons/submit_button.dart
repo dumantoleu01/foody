@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class SignInButton extends StatelessWidget {
+class SubmitButton extends StatelessWidget {
   final String text;
   final Function check;
-  final String path;
-  const SignInButton({Key key, this.text, this.check, this.path})
+  final Function navigator;
+  const SubmitButton({Key key, this.text, this.check, this.navigator})
       : super(key: key);
 
   @override
@@ -21,7 +21,7 @@ class SignInButton extends StatelessWidget {
           primary: Color(0xFF4631D2),
         ),
         onPressed: () {
-          Navigator.pushNamed(context, path);
+          navigator();
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
