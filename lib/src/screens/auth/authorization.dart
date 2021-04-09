@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:foody/src/common/constants/constant.dart';
 import 'package:foody/src/common/widgets/appbar/appbar.dart';
-import 'package:foody/src/common/widgets/buttons/sign_in_button.dart';
+import 'package:foody/src/common/widgets/buttons/submit_button.dart';
 
 class Authorization extends StatefulWidget {
   Authorization({Key key}) : super(key: key);
@@ -47,12 +48,7 @@ class _AuthorizationState extends State<Authorization> {
                               contentPadding:
                                   EdgeInsets.symmetric(vertical: 19),
                               hintText: 'Логин',
-                              hintStyle: TextStyle(
-                                fontFamily: 'Manrope',
-                                color: Color(0xFFC3C3C3),
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                              ),
+                              hintStyle: txtStyle,
                             ),
                             controller: _login,
                           ),
@@ -68,12 +64,7 @@ class _AuthorizationState extends State<Authorization> {
                               contentPadding:
                                   EdgeInsets.symmetric(vertical: 19),
                               hintText: 'Телефон',
-                              hintStyle: TextStyle(
-                                fontFamily: 'Manrope',
-                                color: Color(0xFFC3C3C3),
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                              ),
+                              hintStyle: txtStyle,
                             ),
                             controller: _phone,
                           ),
@@ -89,12 +80,7 @@ class _AuthorizationState extends State<Authorization> {
                               contentPadding:
                                   EdgeInsets.symmetric(vertical: 19),
                               hintText: 'Почта',
-                              hintStyle: TextStyle(
-                                fontFamily: 'Manrope',
-                                color: Color(0xFFC3C3C3),
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                              ),
+                              hintStyle: txtStyle,
                             ),
                             controller: _email,
                           ),
@@ -109,12 +95,7 @@ class _AuthorizationState extends State<Authorization> {
                                 contentPadding:
                                     EdgeInsets.symmetric(vertical: 19),
                                 hintText: 'Пароль',
-                                hintStyle: TextStyle(
-                                  fontFamily: 'Manrope',
-                                  color: Color(0xFFC3C3C3),
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16,
-                                ),
+                                hintStyle: txtStyle,
                                 suffixIcon: IconButton(
                                   icon: Icon(
                                     _passwordVisible
@@ -145,12 +126,7 @@ class _AuthorizationState extends State<Authorization> {
                           padding: const EdgeInsets.only(left: 16, top: 11),
                           child: Text(
                             'Заполните все поля',
-                            style: TextStyle(
-                              fontFamily: 'Manrope',
-                              color: Color(0xFFEC3A4D),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16,
-                            ),
+                            style: txtStyle.copyWith(color: Color(0xFFEC3A4D)),
                           ),
                         )
                       : Offstage(),
@@ -158,14 +134,19 @@ class _AuthorizationState extends State<Authorization> {
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
-                child: SignInButton(
+                child: SubmitButton(
                   text: "Создать аккаунт",
                   check: () {
                     setState(() {
                       _email.text;
                     });
                   },
-                  path: '/confirmation',
+                  navigator: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/confirmation',
+                    );
+                  },
                 ),
               )
             ],

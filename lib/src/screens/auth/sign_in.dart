@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
+import 'package:foody/src/common/constants/constant.dart';
 import 'package:foody/src/common/widgets/appbar/appbar.dart';
-import 'package:foody/src/common/widgets/buttons/sign_in_button.dart';
+import 'package:foody/src/common/widgets/buttons/submit_button.dart';
 
 class SignIn extends StatefulWidget {
   SignIn({Key key}) : super(key: key);
@@ -32,16 +32,9 @@ class _SignInState extends State<SignIn> {
                 SizedBox(
                   height: 43,
                 ),
-                Text(
-                  'Войти через:',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: 'Manrope',
-                    color: Colors.black,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                  ),
-                ),
+                Text('Войти через:',
+                    textAlign: TextAlign.center,
+                    style: txtStyle.copyWith(color: Colors.black)),
                 SizedBox(
                   height: 19,
                 ),
@@ -66,12 +59,7 @@ class _SignInState extends State<SignIn> {
                 Center(
                   child: Text(
                     'Или',
-                    style: TextStyle(
-                      fontFamily: 'Manrope',
-                      color: Color(0xFFC3C3C3),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                    ),
+                    style: txtStyle,
                   ),
                 ),
                 SizedBox(
@@ -85,18 +73,14 @@ class _SignInState extends State<SignIn> {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: TextFormField(
                           decoration: InputDecoration(
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xFFE0E6ED)),
-                            ),
-                            contentPadding: EdgeInsets.symmetric(vertical: 19),
-                            hintText: 'Логин или почта',
-                            hintStyle: TextStyle(
-                              fontFamily: 'Manrope',
-                              color: Color(0xFFC3C3C3),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16,
-                            ),
-                          ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFFE0E6ED)),
+                              ),
+                              contentPadding:
+                                  EdgeInsets.symmetric(vertical: 19),
+                              hintText: 'Логин или почта',
+                              hintStyle: txtStyle),
                           controller: _email,
                         ),
                       ),
@@ -107,12 +91,7 @@ class _SignInState extends State<SignIn> {
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.symmetric(vertical: 19),
                             hintText: 'Пароль',
-                            hintStyle: TextStyle(
-                              fontFamily: 'Manrope',
-                              color: Color(0xFFC3C3C3),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 16,
-                            ),
+                            hintStyle: txtStyle,
                           ),
                           controller: _password,
                         ),
@@ -127,19 +106,14 @@ class _SignInState extends State<SignIn> {
                         padding: const EdgeInsets.only(left: 16, top: 11),
                         child: Text(
                           'Заполните все поля',
-                          style: TextStyle(
-                            fontFamily: 'Manrope',
-                            color: Color(0xFFEC3A4D),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 16,
-                          ),
+                          style: txtStyle.copyWith(color: Color(0xFFEC3A4D)),
                         ),
                       )
                     : Offstage(),
                 SizedBox(
                   height: 32,
                 ),
-                SignInButton(
+                SubmitButton(
                     text: 'Войти',
                     check: () {
                       setState(() {

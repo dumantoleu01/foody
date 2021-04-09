@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:foody/src/common/constants/constant.dart';
 import 'package:foody/src/common/widgets/appbar/appbar.dart';
-import 'package:foody/src/common/widgets/buttons/sign_in_button.dart';
+import 'package:foody/src/common/widgets/buttons/submit_button.dart';
 
 class Confirmation extends StatefulWidget {
   Confirmation({Key key}) : super(key: key);
@@ -11,18 +12,20 @@ class Confirmation extends StatefulWidget {
 
 class _ConfirmationState extends State<Confirmation> {
   String code = '';
-  FocusNode pin1FocusNode;
-  FocusNode pin2FocusNode;
-  FocusNode pin3FocusNode;
-  FocusNode pin4FocusNode;
+  FocusNode pin1FocusNode = FocusNode();
+  FocusNode pin2FocusNode = FocusNode();
+  FocusNode pin3FocusNode = FocusNode();
+  FocusNode pin4FocusNode = FocusNode();
+  List<FocusNode> _focusNodes = [];
+  List<FocusNode> _focusNodesNext = [];
 
   @override
   void initState() {
     super.initState();
-    pin1FocusNode = FocusNode();
-    pin2FocusNode = FocusNode();
-    pin3FocusNode = FocusNode();
-    pin4FocusNode = FocusNode();
+    _focusNodes
+        .addAll({pin1FocusNode, pin2FocusNode, pin3FocusNode, pin4FocusNode});
+    _focusNodesNext
+        .addAll({pin2FocusNode, pin3FocusNode, pin4FocusNode, pin4FocusNode});
   }
 
   @override
@@ -69,154 +72,51 @@ class _ConfirmationState extends State<Confirmation> {
               height: 18,
             ),
             Text(
-              'На почту speedsk85@gmail.com\nбыл отправлен код подтверждения.\nСкопируйте его и вставьте сюда.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: 'Manrope',
-                color: Color(0xFF000000),
-                fontWeight: FontWeight.w400,
-                fontSize: 16,
-              ),
-            ),
+                'На почту speedsk85@gmail.com\nбыл отправлен код подтверждения.\nСкопируйте его и вставьте сюда.',
+                textAlign: TextAlign.center,
+                style: txtStyle.copyWith(fontSize: 20)),
             SizedBox(
               height: 43,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 36.0),
-              child: Form(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    SizedBox(
-                      width: 64,
-                      height: 64,
-                      child: TextFormField(
-                        focusNode: pin1FocusNode,
-                        style: TextStyle(fontSize: 24),
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(vertical: 16),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Color(0xFFFEFEFE)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Color(0xFFFEFEFE)),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Color(0xFFFEFEFE)),
-                          ),
+            Center(
+              child: SizedBox(
+                height: 64,
+                child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _focusNodes.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: SizedBox(
+                        width: 64,
+                        height: 64,
+                        child: TextFormField(
+                          focusNode: _focusNodes[index],
+                          style: TextStyle(fontSize: 24),
+                          decoration: confirmButtonDec,
+                          textAlign: TextAlign.center,
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            index == _focusNodesNext.length - 1
+                                ? _focusNodesNext[index].unfocus()
+                                : nextField(
+                                    value: value,
+                                    focusNode: _focusNodesNext[index]);
+                            saveCode(value);
+                          },
                         ),
-                        textAlign: TextAlign.center,
-                        keyboardType: TextInputType.number,
-                        onChanged: (value) {
-                          nextField(value: value, focusNode: pin2FocusNode);
-                          saveCode(value);
-                        },
                       ),
-                    ),
-                    SizedBox(
-                      width: 64,
-                      height: 64,
-                      child: TextFormField(
-                        focusNode: pin2FocusNode,
-                        style: TextStyle(fontSize: 24),
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(vertical: 16),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Color(0xFFFEFEFE)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Color(0xFFFEFEFE)),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Color(0xFFFEFEFE)),
-                          ),
-                        ),
-                        textAlign: TextAlign.center,
-                        keyboardType: TextInputType.number,
-                        onChanged: (value) {
-                          nextField(value: value, focusNode: pin3FocusNode);
-                          saveCode(value);
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      width: 64,
-                      height: 64,
-                      child: TextFormField(
-                        focusNode: pin3FocusNode,
-                        style: TextStyle(fontSize: 24),
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(vertical: 16),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Color(0xFFFEFEFE)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Color(0xFFFEFEFE)),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Color(0xFFFEFEFE)),
-                          ),
-                        ),
-                        textAlign: TextAlign.center,
-                        keyboardType: TextInputType.number,
-                        onChanged: (value) {
-                          nextField(value: value, focusNode: pin4FocusNode);
-                          saveCode(value);
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      width: 64,
-                      height: 64,
-                      child: TextFormField(
-                        focusNode: pin4FocusNode,
-                        style: TextStyle(fontSize: 24),
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(vertical: 16),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Color(0xFFFEFEFE)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Color(0xFFFEFEFE)),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Color(0xFFFEFEFE)),
-                          ),
-                        ),
-                        textAlign: TextAlign.center,
-                        keyboardType: TextInputType.number,
-                        onChanged: (value) {
-                          pin4FocusNode.unfocus();
-                          saveCode(value);
-                          // print(code);
-                        },
-                      ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
             ),
             Text(
               'Для быстрого доступа к почте',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: 'Manrope',
-                color: Color(0xFF000000),
-                fontWeight: FontWeight.w400,
-                fontSize: 16,
-              ),
+              style: txtStyle.copyWith(color: Color(0xFF000000)),
             ),
             Container(
               width: 208,
@@ -244,7 +144,7 @@ class _ConfirmationState extends State<Confirmation> {
             SizedBox(
               height: 48,
             ),
-            SignInButton(
+            SubmitButton(
               text: 'Отправить код ещё раз',
             )
           ],
