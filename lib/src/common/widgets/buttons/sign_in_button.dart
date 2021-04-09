@@ -2,19 +2,23 @@ import 'package:flutter/material.dart';
 
 class SignInButton extends StatelessWidget {
   final String text;
-  const SignInButton({Key key, this.text}) : super(key: key);
+  final Function check;
+  const SignInButton({Key key, this.text, this.check}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      //margin: EdgeInsets.symmetric(horizontal: 50),
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      width: MediaQuery.of(context).size.width * 100,
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
       decoration: BoxDecoration(
         border: Border(),
       ),
-      child: RaisedButton(
-        color: Color(0xFF4631D2),
-        onPressed: () {},
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          elevation: 0,
+          primary: Color(0xFF4631D2),
+        ),
+        onPressed: check,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: Text(
