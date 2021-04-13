@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foody/src/common/widgets/navbar/navbar.dart';
 import 'package:foody/src/screens/auth/authorization.dart';
 import 'package:foody/src/screens/auth/confirmation.dart';
+import 'package:foody/src/screens/auth/filter/filter_screen.dart';
 import 'package:foody/src/screens/auth/sign_in.dart';
 import 'package:foody/src/screens/auth/sign_in_validation.dart';
 import 'package:foody/src/screens/home/home.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         '/authorization': (context) => Authorization(),
         '/confirmation': (context) => Confirmation(),
         '/restaurant': (context) => Restaurant(),
+        '/filter': (context) => Filter(),
       },
     );
   }
